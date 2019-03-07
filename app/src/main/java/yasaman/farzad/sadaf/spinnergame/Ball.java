@@ -9,10 +9,15 @@ public class Ball {
     private float y;
     private float vx0;
     private float vy0;
-    private float v;
     private long t0;
     private float windowWidth;
     private float windowHeight;
+    private float tethaX;
+    private float tethaY;
+    private float tethaZ;
+    private long t;
+    private boolean updated;
+
     public Ball(float x, float y)
     {
         this.x = x;
@@ -20,6 +25,9 @@ public class Ball {
         this.t0 = Config.getTime();
         this.vx0 = 0;
         this.vy0 = 0;
+        this.tethaX = 0;
+        this.tethaY = 0;
+        this.tethaZ = 0;
 
     }
     public void setWindow(float windowWidth, float windowHeight)
@@ -27,10 +35,36 @@ public class Ball {
         this.windowHeight = windowHeight;
         this.windowWidth = windowWidth;
     }
+
+    public void gyroUpdate(float xGyro, float yGyro, float zGyro)
+    {
+        t = Config.getTime();
+        updated = true;
+        float deltaT = (float) (t - t0) / 1000 ;
+        float newTethaX = yGyro * deltaT + tethaX;
+        float newTethaY = xGyro * deltaT + tethaY;
+        float newTethaZ = zGyro * deltaT + tethaZ;
+
+        float newXGravity = Config.G * (float)Math.sin(newTethaX);
+        float newYGravity = Config.G * (float)Math.sin(newTethaY);
+        float newZGravity = Config.G * (float)Math.cos(newTethaZ);
+
+        tethaX = newTethaX;
+        tethaY = newTethaY;
+        tethaZ = newTethaZ;
+
+        gravityUpdate( -newXGravity, newYGravity, newZGravity);
+
+    }
     public void gravityUpdate(float xGravity, float yGravity, float zGravity)
     {
+        xGravity *= Config.METER ;
+        zGravity *= Config.METER ;
+        yGravity *= Config.METER ;
+
         xGravity = -xGravity;
-        long t = Config.getTime();
+        if(!updated)
+            t = Config.getTime();
         float deltaT = (float) (t - t0) / 1000 ;
 
         float nx = xGravity * Config.M;
@@ -52,33 +86,73 @@ public class Ball {
         ay = yGravity + (friction_m_ny / Config.M);
 
 
-        if(vx0 != 0 || nx - friction_s > 0)
+        boolean canMoveX = false;
+        if(vx0 < 5 && vx0 > -5)
         {
-            if(vx0 > 0 && ax < 0 && vx0 <0.1 || vx0 < 0 && ax > 0 && vx0 > -0.1)
-             vx0 = 0;
-            x = (float) (((0.5 * ax * deltaT * deltaT) + (vx0 * deltaT)) * Config.METER + x0) ;
-            vx0 = ax * deltaT + vx0;
-
+            if(Math.abs(nx)> Math.abs(friction_s))
+            {
+                canMoveX = true;
+            }
+        }
+        else
+        {
+            canMoveX = true;
         }
 
-        if(vy0 != 0 || ny - friction_s > 0)
+        boolean canMoveY = false;
+        if(vy0 < 5 && vy0 > -5)
         {
-            if(vy0 > 0 && ax < 0 && vy0 <0.1 || vy0 < 0 && ax > 0 && vy0 > -0.1)
+            if(Math.abs(ny)> Math.abs(friction_s))
+            {
+                canMoveY = true;
+            }
+        }
+        else
+        {
+            canMoveY = true;
+        }
+
+        if(canMoveX)
+        {
+            float newX = (float) (((0.5 * ax * deltaT * deltaT) + (vx0 * deltaT)) + x0) ;
+            if( newX + Config.BALL_SIZE/2 > windowWidth/2 ||  newX - Config.BALL_SIZE/2 < -windowWidth/2)
+            {
+                vx0 = 0;
+            }
+            else
+            {
+                x = newX ;
+                vx0 = ax * deltaT + vx0;
+            }
+        }
+        else
+        {
+            vx0 = 0;
+        }
+
+        if(canMoveY)
+        {
+            float newY = (float) (((0.5 * ay * deltaT * deltaT) + (vy0 * deltaT)) + y0) ;
+            if( newY + Config.BALL_SIZE/2 > windowHeight/2 ||  newY - Config.BALL_SIZE/2 < -windowHeight/2)
+            {
                 vy0 = 0;
-            y = (float) (((0.5 * ay * deltaT * deltaT) + (vy0 * deltaT)) * Config.METER + y0) ;
-            vy0 = ay * deltaT + vy0;
+            }
+            else
+            {
+                y = newY;
+                vy0 = ay * deltaT + vy0;
+            }
 
         }
-
-        if( x + Config.BALL_SIZE/2 > windowWidth/2 ||  x - Config.BALL_SIZE/2 < -windowWidth/2)
-            vx0 = -vx0;
-        if( y + Config.BALL_SIZE/2 > windowHeight/2 ||  y - Config.BALL_SIZE/2 < -windowHeight/2)
-            vy0 = -vy0;
+        else
+        {
+            vy0 = 0;
+        }
 
         x0 = x ;
         y0 = y;
         t0 = t;
-
+        updated = false;
     }
 
     public float getX() {
@@ -91,5 +165,9 @@ public class Ball {
 
     public float getVy0() {
         return vy0;
+    }
+
+    public float getVx0() {
+        return vx0;
     }
 }

@@ -1,7 +1,7 @@
 package yasaman.farzad.sadaf.spinnergame;
 
 public class Config  {
-    public static float METER =  10;
+    public static float METER =  90;
     public static float M = (float) 0.01;
     public static float G = (float) 9.80665;
     public static float M_K = (float) 0.1;
@@ -10,5 +10,5 @@ public class Config  {
     {
         return System.currentTimeMillis();
     }
-    public static double BALL_SIZE = 100;
+    public static double BALL_SIZE = 150;
 }

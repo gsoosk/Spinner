@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".GyroActivity">
 
     <yasaman.farzad.sadaf.spinnergame.BallView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/ball_view"/>
+        android:id="@+id/ball_view_g"/>
 
     <TextView
-        android:id="@+id/x_text"
+        android:id="@+id/g_x_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -20,38 +20,37 @@
         tools:layout_editor_absoluteY="92dp" />
 
     <TextView
-        android:id="@+id/y_text"
+        android:id="@+id/g_y_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintTop_toBottomOf="@+id/x_text"
+        app:layout_constraintTop_toBottomOf="@+id/g_x_text"
         tools:layout_editor_absoluteX="70dp" />
 
     <TextView
-        android:id="@+id/z_text"
+        android:id="@+id/g_z_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintTop_toBottomOf="@+id/y_text"
+        app:layout_constraintTop_toBottomOf="@+id/g_y_text"
         tools:layout_editor_absoluteX="70dp" />
-
     <TextView
-        android:id="@+id/vx_text"
+        android:id="@+id/g_vx_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintTop_toBottomOf="@+id/z_text"
+        app:layout_constraintTop_toBottomOf="@+id/g_z_text"
         tools:layout_editor_absoluteX="70dp" />
 
     <TextView
-        android:id="@+id/vy_text"
+        android:id="@+id/g_vy_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintTop_toBottomOf="@+id/vx_text"
+        app:layout_constraintTop_toBottomOf="@+id/g_vx_text"
         tools:layout_editor_absoluteX="70dp" />
 
 </android.support.constraint.ConstraintLayout>
