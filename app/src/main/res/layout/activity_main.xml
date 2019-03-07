@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/back2"
+        />
+
+
+
     <yasaman.farzad.sadaf.spinnergame.BallView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,8 +23,10 @@
         android:id="@+id/x_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="70dp"
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteY="92dp" />
 
     <TextView
@@ -24,34 +34,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="TextView"
-        app:layout_constraintTop_toBottomOf="@+id/x_text"
-        tools:layout_editor_absoluteX="70dp" />
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/x_text" />
 
     <TextView
         android:id="@+id/z_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="TextView"
-        app:layout_constraintTop_toBottomOf="@+id/y_text"
-        tools:layout_editor_absoluteX="70dp" />
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/y_text" />
 
     <TextView
         android:id="@+id/vx_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:text="TextView"
-        app:layout_constraintTop_toBottomOf="@+id/z_text"
-        tools:layout_editor_absoluteX="70dp" />
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/z_text" />
 
     <TextView
         android:id="@+id/vy_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="TextView"
-        app:layout_constraintTop_toBottomOf="@+id/vx_text"
-        tools:layout_editor_absoluteX="70dp" />
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vx_text" />
+
+
 
 </android.support.constraint.ConstraintLayout>

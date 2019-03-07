@@ -25,15 +25,19 @@ public class MainActivity extends AppCompatActivity {
     private Ball ball;
     private long time;
     private boolean updated = false;
+    private boolean start = false;
+
 
 
     private SensorEventListener listener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
-            ball.gravityUpdate(sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2]);
+            if(start)
+            {
+                ball.gravityUpdate(sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2]);
+
+            }
             updateTextViews(sensorEvent);
-
-
 
         }
 
@@ -56,6 +60,15 @@ public class MainActivity extends AppCompatActivity {
 
         sensorManager.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_FASTEST);
 
+
+        BallView ballView = (BallView) findViewById(R.id.ball_view);
+        ballView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                start = true;
+                ball = new Ball(0, 0);
+            }
+        });
 
         Timer myTimer = new Timer();
         myTimer.schedule(new TimerTask() {

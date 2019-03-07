@@ -6,6 +6,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.Timer;
@@ -17,12 +18,15 @@ public class GyroActivity extends AppCompatActivity {
     private Ball ball;
     private long time;
     private boolean updated = false;
-
+    private boolean start = false;
 
     private SensorEventListener listener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
-            ball.gyroUpdate(sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2]);
+            if(start) {
+                ball.gyroUpdate(sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2]);
+
+            }
             updateTextViews(sensorEvent);
 
 
@@ -50,6 +54,15 @@ public class GyroActivity extends AppCompatActivity {
         sensorManager.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_FASTEST);
 
 
+        BallView ballView = (BallView) findViewById(R.id.ball_view_g);
+        ballView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                start = true;
+                ball = new Ball(0, 0);
+            }
+        });
+
         Timer myTimer = new Timer();
         myTimer.schedule(new TimerTask() {
             @Override
@@ -67,9 +80,9 @@ public class GyroActivity extends AppCompatActivity {
             BallView ballView = (BallView) findViewById(R.id.ball_view_g);
             ball.setWindow(ballView.getWidth(), ballView.getHeight());
         }
-        ((TextView) findViewById(R.id.g_x_text)).setText("X Gravity : " + Float.toString(sensorEvent.values[0]));
-        ((TextView) findViewById(R.id.g_y_text)).setText("Y Gravity : " +Float.toString(sensorEvent.values[1]));
-        ((TextView) findViewById(R.id.g_z_text)).setText("Z Gravity : " +Float.toString(sensorEvent.values[2]));
+        ((TextView) findViewById(R.id.g_x_text)).setText("X Gyroscope : " + Float.toString(sensorEvent.values[0]));
+        ((TextView) findViewById(R.id.g_y_text)).setText("Y Gyroscope : " +Float.toString(sensorEvent.values[1]));
+        ((TextView) findViewById(R.id.g_z_text)).setText("Z Gyroscope : " +Float.toString(sensorEvent.values[2]));
         ((TextView) findViewById(R.id.g_vx_text)).setText("Vx : " +Float.toString(ball.getVx0()));
         ((TextView) findViewById(R.id.g_vy_text)).setText("Vy : " +Float.toString(ball.getVy0()));
     }
