@@ -29,6 +29,11 @@ public class GravityActivity extends AppCompatActivity {
                 ball.gravityUpdate(sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2]);
 
             }
+            if(!updated)
+            {
+                BallView ballView = (BallView) findViewById(R.id.ball_view);
+                ball.setWindow(ballView.getWidth(), ballView.getHeight());
+            }
 
         }
 

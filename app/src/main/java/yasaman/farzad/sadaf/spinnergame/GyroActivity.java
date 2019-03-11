@@ -6,6 +6,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -27,7 +28,11 @@ public class GyroActivity extends AppCompatActivity {
                 ball.gyroUpdate(sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2]);
 
             }
-
+            if(!updated)
+            {
+                BallView ballView = (BallView) findViewById(R.id.ball_view_g);
+                ball.setWindow(ballView.getWidth(), ballView.getHeight());
+            }
 
 
 
@@ -58,6 +63,7 @@ public class GyroActivity extends AppCompatActivity {
         ballView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("JGHHHH","FFFF");
                 start = true;
                 ball = new Ball(0, 0);
             }
