@@ -27,7 +27,7 @@ public class GyroActivity extends AppCompatActivity {
                 ball.gyroUpdate(sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2]);
 
             }
-            updateTextViews(sensorEvent);
+
 
 
 
@@ -73,17 +73,5 @@ public class GyroActivity extends AppCompatActivity {
         }, 0, 17);
 
     }
-    public void updateTextViews(SensorEvent sensorEvent)
-    {
-        if(!updated)
-        {
-            BallView ballView = (BallView) findViewById(R.id.ball_view_g);
-            ball.setWindow(ballView.getWidth(), ballView.getHeight());
-        }
-        ((TextView) findViewById(R.id.g_x_text)).setText("X Gyroscope : " + Float.toString(sensorEvent.values[0]));
-        ((TextView) findViewById(R.id.g_y_text)).setText("Y Gyroscope : " +Float.toString(sensorEvent.values[1]));
-        ((TextView) findViewById(R.id.g_z_text)).setText("Z Gyroscope : " +Float.toString(sensorEvent.values[2]));
-        ((TextView) findViewById(R.id.g_vx_text)).setText("Vx : " +Float.toString(ball.getVx0()));
-        ((TextView) findViewById(R.id.g_vy_text)).setText("Vy : " +Float.toString(ball.getVy0()));
-    }
+
 }

@@ -19,7 +19,7 @@ public class MenuActivity extends AppCompatActivity {
         gravityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mainActivity = new Intent(getBaseContext(), MainActivity.class);
+                Intent mainActivity = new Intent(getBaseContext(), GravityActivity.class);
                 startActivity(mainActivity);
 
             }

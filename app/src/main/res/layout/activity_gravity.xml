@@ -4,6 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Gravity">
+    tools:context=".GravityActivity">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/back2"
+        />
+
+
+
+    <yasaman.farzad.sadaf.spinnergame.BallView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ball_view"/>
+
+
+
 
 </android.support.constraint.ConstraintLayout>
